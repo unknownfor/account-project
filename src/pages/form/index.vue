@@ -49,11 +49,11 @@
           placeholder="请选择学历"
           @click="educationShow = true"
         ></u-input>
-        <u-select
+        <!-- <u-select
           v-model="educationShow"
           :list="educationOptions"
           @confirm="changeEducation"
-        />
+        /> -->
       </u-form-item>
       <u-row>
         <u-col span="6">

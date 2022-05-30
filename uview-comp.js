@@ -17,7 +17,7 @@ import UCellGroup from 'uview-ui/components/u-cell-group/u-cell-group'
 import URow from 'uview-ui/components/u-row/u-row'
 import UUpload from 'uview-ui/components/u-upload/u-upload'
 import UPicker from 'uview-ui/components/u-picker/u-picker'
-import USelect from 'uview-ui/components/u-select/u-select'
+// import USelect from 'uview-ui/components/u-select/u-select'
 import UIcon from 'uview-ui/components/u-icon/u-icon'
 import UTabs from 'uview-ui/components/u-tabs/u-tabs'
 import UImage from 'uview-ui/components/u-image/u-image'
@@ -56,7 +56,7 @@ Vue.component('u-swiper', USwiper)
 Vue.component('u-cell-item', UCellItem)
 Vue.component('u-cell-group', UCellGroup)
 Vue.component('u-picker', UPicker)
-Vue.component('u-select', USelect)
+// Vue.component('u-select', USelect)
 Vue.component('u-icon', UIcon)
 Vue.component('u-tabs', UTabs)
 Vue.component('u-image', UImage)

@@ -33,12 +33,17 @@
     "useMultiFrameRuntime": false,
     "useApiHook": true
   },
-  "appid": "wx0db38963938fe329",
-  "projectname": "%E6%9C%88%E8%80%83%E6%88%90%E7%BB%A9%E8%AE%B0%E5%BD%95",
-  "libVersion": "2.16.0",
+  "compileType": "miniprogram",
+  "libVersion": "2.23.4",
+  "appid": "wxdfbc58c1ca770699",
+  "projectname": "%E5%8D%B3%E8%B4%A6",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  },
   "condition": {
     "search": {
       "list": []

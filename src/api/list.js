@@ -1,9 +1,35 @@
-import _request from '@/utils/request';
+import request from '@/utils/request';
 
-const baseUrl = '/list/';
-const request = (url, ...arg) => _request(baseUrl + url, ...arg);
+// const { requestOld } = require('@/utils/requestOld');
+const baseUrl = '/usermanager/';
+// const { baseUrl } = require('./env').test;
 
+// const request = (url, ...arg) => _request(baseUrl + url, ...arg);
+
+console.log(request)
 export default {
+  // 获取短信验证码
+  getSms: (data) => {
+    return request(
+      'verificationCode/v1/getSms',
+      data
+    );
+  },
+  mainList: (data) => {
+    return request({
+      url: '/usermanager/verificationCode/v1/getSms',
+      method: 'post',
+      data
+    })
+  },
+  getSmso: (data) => {
+    return requestOld(
+      'usermanager/verificationCode/v1/getSms',
+      'POST',
+      data,
+      false,
+    );
+  },
   list(data) {
     // mock
     return new Promise((resolve, reject) => {

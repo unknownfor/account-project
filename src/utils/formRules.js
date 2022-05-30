@@ -16,4 +16,61 @@ export default {
     message: '请填写符合要求的身份证号',
     trigger: 'blur',
   },
+  // rules: {
+  //   /**
+  //    * 必填项
+  //    * @param {String} label
+  //    */
+  //   required(label, options = {}) {
+  //     return {
+  //       required: true,
+  //       message: makeMsg(`${label}不能为空`, options.extraMsg),
+  //       trigger: 'blur',
+  //       ...options,
+  //     };
+  //   },
+
+  //   /**
+  //    * 限制长度
+  //    * @param {Number} min
+  //    * @param {Number} max
+  //    */
+  //   len(min = 0, max = Infinity, options = {}) {
+  //     let message;
+  //     if (min === 0) {
+  //       message = `长度不能超过${max}个字符`;
+  //     } else if (max === Infinity) {
+  //       message = `长度不能少于${min}个字符`;
+  //     } else {
+  //       message = `长度须在${min}到${max}个字符之间`;
+  //     }
+  //     return {
+  //       min,
+  //       max,
+  //       message: makeMsg(message, options.extraMsg),
+  //       trigger: 'blur',
+  //     };
+  //   },
+
+  //   /*
+  //     不允许输入空格
+  //    */
+  //   notBlank(label) {
+  //     return {
+  //       validator: (rule, value = '', callback) => {
+  //         value += '';
+  //         let arr = [];
+  //         if (value) {
+  //           arr = value.split(' ');
+  //         }
+  //         if (arr.length > 1) {
+  //           callback(new Error(`${label}不能包含空格`));
+  //         } else {
+  //           callback();
+  //         }
+  //       },
+  //       trigger: 'blur',
+  //     };
+  //   },
+  // },
 };

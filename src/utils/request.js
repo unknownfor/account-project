@@ -1,6 +1,6 @@
 import setting from '../setting';
 
-let devUrl = setting.baseUrl;
+const BASEURL = setting.test.baseUrl;
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -8,84 +8,67 @@ const isDev = process.env.NODE_ENV === 'development';
 devUrl = '';
 // #endif
 
-const baseUrl = devUrl;
-
-const POST = 'POST';
-const UPLOAD = 'UPLOAD';
-const SUCCESS_CODES = 200;
-const RefreshCode = 506;
-const LogoutCode = 503;
-
-const getHeader = () => {
-  const accessToken = uni.getStorageSync('accessToken') || '';
-  return {
-    token: accessToken,
-  };
-};
-/**
- *
- * @param {string} method 请求方法
- * @param {string} url api地址
- * @param {string} data 入参
- */
-
-const request = (url, data, method = POST) =>
-  new Promise((resolve, reject) => {
-    if (method !== UPLOAD) {
-      uni.request({
-        url: `${baseUrl}/api${url}`,
-        method,
-        data,
-        header: getHeader(),
-        success(res) {
-          // 请求成功
-          const data = res.data;
-          if (data.code === SUCCESS_CODES) {
-            resolve(data.data);
-          } else {
-            // 其他异常
-            console.log(data);
-            if (data.code === RefreshCode) {
-            } else if (data.code === LogoutCode) {
-              reject(data);
-              return;
-              // uni.navigateTo({ url: '/pages/login/index' })
-            } else {
-              uni.showToast({ title: data.msg, icon: 'none' });
-            }
-            uni.showToast({ title: data.msg, icon: 'none' });
-            reject(data);
-          }
-        },
-
-        fail(err) {
-          console.log(err);
-          // 请求失败
-          reject(new Error('请检查网络'));
-        },
-      });
-    } else {
-      console.log(data, url);
-      uni.uploadFile({
-        file: data,
-        filePath: data.path,
-        name: 'file',
-        url: `${baseUrl}/api/${url}`,
-        header: getHeader(method, url, true),
-        success: (resObj) => {
-          const res = JSON.parse(resObj.data);
-          if (res.code === SUCCESS_CODES) {
-            resolve(res.data);
-          } else {
-            // 其他异常
-            reject(res.msg);
-          }
-        },
-        fail: (err) => {
-          reject(new Error('上传失败:' + JSON.stringify(err)));
-        },
-      });
-    }
-  });
-
-export default request;
+// import { BASEURL } from './index.js'
+// import { getToken } from './auth.js'
+ 
+const request = (config) => {
+	let header = {
+		"Content-Type": config.contentType || "application/json;charset=utf-8",
+	}
+	// if(getToken()) {
+		header['token'] = uni.getStorageSync('accessToken') || '';
+	// }
+	return new Promise((resove, reject) => {
+		uni.showLoading({
+			title: "加载中",
+			mask: true
+		})
+		uni.request({
+			url: BASEURL + config.url,
+			data: config.data || '',
+			header: header,
+			method: config.method,
+			dataType: "json",
+			success: (res) => {
+				console.log(res.data, '=======请求结果=======')
+				const { data } = res
+				const { code, result } = data
+				switch(code){
+					case 200:
+					resove(res.data)
+					break
+					case 500:
+					uni.showToast({
+						title:"请求错误",
+						duration:1500,
+						mask:false,
+						icon:"none"
+					})
+					break
+					default:
+					uni.showToast({
+						title: data.msg,
+						duration:2000,
+						mask:false,
+						icon:"none"
+					})
+				}
+			},
+			fail: (error) => {
+				uni.showToast({
+					title:"请求错误",
+					duration:1500,
+					mask:false,
+					icon:"none"
+				});
+				reject(error)
+			},
+			complete: () => {
+				setTimeout(() => {
+					uni.hideLoading()
+				}, 500)
+			}
+		})
+	})
+}
+export default request
